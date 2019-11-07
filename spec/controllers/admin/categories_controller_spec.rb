@@ -28,7 +28,7 @@ describe Admin::CategoriesController do
     end
     it 'should add a category' do
       post :edit, :category => {name: "Name", keywords: "Keyword", permalink: "Permalink", description: "Long Description"}
-      assert_response :redirect, :action => 'index'
+      assert_response :redirect, :action => 'edit'
       assigns(:categories).should_not be_nil
       expect(flash[:notice]).to eq("Category was successfully saved.")
     end
