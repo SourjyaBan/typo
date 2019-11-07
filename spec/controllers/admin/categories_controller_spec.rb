@@ -26,7 +26,13 @@ describe Admin::CategoriesController do
       assert_tag :tag => "table",
         :attributes => { :id => "category_container" }
     end
-
+    it 'should add a category' do
+      post :edit, :category => {name: "Name", keywords: "Keyword", permalink: "Permalink", description: "Long Description"}
+      assert_response :redirect, :action => 'index'
+      assigns(:categories).should_not be_nil
+      expect(flash[:notice]).to eq("Category was successfully saved.")
+    end
+      
     it 'should have valid category' do
       assigns(:category).should_not be_nil
       assert assigns(:category).valid?
